@@ -17,3 +17,5 @@ Animatorset --用于控制动画集合的显示效果
 TypeEvaluators －－－值计算器，用于控制值变化的规律
 
 Interprolators －－－插值计算器，用于控制值变化的规律
+
+![](Interpolator.png)

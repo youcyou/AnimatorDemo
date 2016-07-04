@@ -1,14 +1,12 @@
-package com.example.anmatior;
+package com.example.animator;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
+import android.animation.TypeEvaluator;
+import android.animation.ValueAnimator;
+import android.graphics.PointF;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.AnimationSet;
 import android.view.animation.BounceInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,17 +19,47 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private ImageView imageView;
     private Button button;
 
-    private int[] res = {R.id.imageviewa, R.id.imageviewb, R.id.imageviewc, R.id.imageviewd,
-            R.id.imageviewe, R.id.imageviewf, R.id.imageviewg, R.id.imageviewh};
+    private int[] res = {R.id.imageviewa,  R.id.imageviewb,  R.id.imageviewc,  R.id.imageviewd,
+             R.id.imageviewe,  R.id.imageviewf,  R.id.imageviewg,  R.id.imageviewh};
     private ArrayList<ImageView> imageViewArrayList = new ArrayList();
     private boolean flag = true;
+
+    private Button valueButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView( R.layout.activity_main);
+        valueAnimator();
     }
 
+
+    /**
+     * value animator
+     */
+    private void valueAnimator(){
+        valueButton = (Button) findViewById( R.id.value_button);
+        valueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ValueAnimator animator = ValueAnimator.ofInt(
+                        0,100);
+                animator.setDuration(1000);
+                animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        Integer value = (Integer) animation.getAnimatedValue();
+                        valueButton.setText("" +value);
+                    }
+                });
+                animator.start();
+            }
+        });
+    }
+
+    /**
+     * object animator exercise
+     */
     private void objectAnimatorExercise() {
 
         for (int i = 0; i < res.length; i++) {
@@ -45,7 +73,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.imageviewa:
+            case  R.id.imageviewa:
                 if (flag) {
                     startAnim();
                     flag = false;
@@ -81,9 +109,12 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * object animator
+     */
     private void animator() {
-        imageView = (ImageView) findViewById(R.id.image);
-        button = (Button) findViewById(R.id.button);
+        imageView = (ImageView) findViewById( R.id.image);
+        button = (Button) findViewById( R.id.button);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override

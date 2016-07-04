@@ -29,7 +29,8 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/imageviewb"
@@ -87,4 +88,12 @@
             android:layout_centerHorizontal="true"
             android:src="@mipmap/a" />
     </RelativeLayout>
+
+    <Button
+        android:text="click"
+        android:id="@+id/value_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
 </RelativeLayout>
