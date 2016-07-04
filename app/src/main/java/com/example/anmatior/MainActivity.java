@@ -1,5 +1,7 @@
 package com.example.anmatior;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
@@ -48,31 +50,68 @@ public class MainActivity extends ActionBarActivity {
                 ObjectAnimator.ofFloat(imageView, "translationX",500).setDuration(1000).start();
                 */
 
+                /*
                 //3 组合animator
-//                ObjectAnimator.ofFloat(imageView, "translationX",0,500).setDuration(1000).start();
-//                ObjectAnimator.ofFloat(imageView, "translationY",0,500).setDuration(1000).start();
-//                ObjectAnimator.ofFloat(imageView, "rotation",0,360).setDuration(500).start();
+                ObjectAnimator.ofFloat(imageView, "translationX",0,500).setDuration(1000).start();
+                ObjectAnimator.ofFloat(imageView, "translationY",0,500).setDuration(1000).start();
+                ObjectAnimator.ofFloat(imageView, "rotation",0,360).setDuration(500).start();
 
-//                PropertyValuesHolder p1 = PropertyValuesHolder.ofFloat("translationX",0,500) ;
-//                PropertyValuesHolder p2 = PropertyValuesHolder.ofFloat("translationY",0,500) ;
-//                PropertyValuesHolder p3 = PropertyValuesHolder.ofFloat("rotation",0,360) ;
-//                ObjectAnimator.ofPropertyValuesHolder(imageView,p1,p2,p3).setDuration(1000).start();
+                PropertyValuesHolder p1 = PropertyValuesHolder.ofFloat("translationX",0,500) ;
+                PropertyValuesHolder p2 = PropertyValuesHolder.ofFloat("translationY",0,500) ;
+                PropertyValuesHolder p3 = PropertyValuesHolder.ofFloat("rotation",0,360) ;
+                ObjectAnimator.ofPropertyValuesHolder(imageView,p1,p2,p3).setDuration(1000).start();
 
                 ObjectAnimator animator1 = ObjectAnimator.ofFloat(imageView, "translationX",0,500);
                 ObjectAnimator animator2 = ObjectAnimator.ofFloat(imageView, "translationY",0,500);
                 ObjectAnimator animator3 = ObjectAnimator.ofFloat(imageView, "rotation",0,360);
                 AnimatorSet set = new AnimatorSet();
 
-//                set.playTogether(animator1,animator2,animator3); //同时
+                set.playTogether(animator1,animator2,animator3); //同时
 
-//                set.playSequentially(animator1,animator2,animator3);//顺序
+                set.playSequentially(animator1,animator2,animator3);//顺序
 
                 set.play(animator1).with(animator2); // with after before
                 set.play(animator3).after(animator1);
 
                 set.setDuration(1000);
                 set.start();
+                */
+
+                /*
+                //4 anmator listener
+                Animator animator = ObjectAnimator.ofFloat(imageView, "alpha",0,1).setDuration(1000);
+                animator.addListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
+                animator.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        Toast.makeText(MainActivity.this, "animation end", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                animator.start();
+                */
             }
+
         });
 
     }
