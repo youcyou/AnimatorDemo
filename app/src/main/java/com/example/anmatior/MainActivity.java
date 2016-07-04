@@ -9,20 +9,80 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AnimationSet;
+import android.view.animation.BounceInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class MainActivity extends ActionBarActivity {
+import java.util.ArrayList;
+
+public class MainActivity extends ActionBarActivity implements View.OnClickListener {
 
     private ImageView imageView;
     private Button button;
+
+    private int[] res = {R.id.imageviewa, R.id.imageviewb, R.id.imageviewc, R.id.imageviewd,
+            R.id.imageviewe, R.id.imageviewf, R.id.imageviewg, R.id.imageviewh};
+    private ArrayList<ImageView> imageViewArrayList = new ArrayList();
+    private boolean flag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        objectAnimatorExercise();
+    }
 
+    private void objectAnimatorExercise() {
+
+        for (int i = 0; i < res.length; i++) {
+            ImageView imageView = (ImageView) findViewById(res[i]);
+            imageView.setOnClickListener(this);
+            imageViewArrayList.add(imageView);
+        }
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.imageviewa:
+                if (flag) {
+                    startAnim();
+                    flag = false;
+                } else {
+                    closeAnim();
+                    flag = true;
+                }
+                break;
+            default:
+                Toast.makeText(MainActivity.this, v.getId() + " clicked", Toast.LENGTH_SHORT).show();
+                break;
+
+        }
+    }
+
+    private void startAnim() {
+        for (int i = 1; i < res.length; i++) {
+            ObjectAnimator animator = ObjectAnimator.ofFloat(imageViewArrayList.get(i), "translationY", 0, i * 250);
+            animator.setDuration(500);
+            animator.setStartDelay(i * 350);
+            animator.setInterpolator(new BounceInterpolator());
+            animator.start();
+        }
+    }
+
+    private void closeAnim() {
+        for (int i = 1; i < res.length; i++) {
+            ObjectAnimator animator = ObjectAnimator.ofFloat(imageViewArrayList.get(i), "translationY", i * 250, 0);
+            animator.setDuration(500);
+            animator.setStartDelay(i * 350);
+            animator.setInterpolator(new BounceInterpolator());
+            animator.start();
+        }
+    }
+
+    private void animator() {
         imageView = (ImageView) findViewById(R.id.image);
         button = (Button) findViewById(R.id.button);
 
@@ -113,7 +173,6 @@ public class MainActivity extends ActionBarActivity {
             }
 
         });
-
     }
 
 
