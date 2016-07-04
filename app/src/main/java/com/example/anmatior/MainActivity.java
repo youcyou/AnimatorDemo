@@ -1,5 +1,6 @@
 package com.example.anmatior;
 
+import android.animation.ObjectAnimator;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,6 +15,7 @@ public class MainActivity extends ActionBarActivity {
 
     private ImageView imageView;
     private Button button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,16 +33,22 @@ public class MainActivity extends ActionBarActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*
                 //1. animation
-                TranslateAnimation animation = new TranslateAnimation(0,500,0,0);
+                TranslateAnimation animation = new TranslateAnimation(0, 500, 0, 0);
                 animation.setDuration(1000);
                 animation.setFillAfter(true);
                 imageView.startAnimation(animation);
+                */
+
+                //2 . animator
+                // translationX 偏移量
+                // X 绝对值
+                ObjectAnimator.ofFloat(imageView, "translationX",500).setDuration(1000).start();
             }
         });
 
     }
-
 
 
 }
